@@ -1,7 +1,6 @@
 package com.sabrimonaf.json;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,24 +12,24 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Sabri on 10/17/17.
+ * Created by Sabri on 10/21/17.
  */
 
-public class WeatherUpdatesAdapter extends ArrayAdapter<WeatherUpdate> {
+public class SearchResultAdapter extends ArrayAdapter<SearchResult> {
 
     // global variables to make them accessible
-    Context context;
-    int resource;
-    ArrayList<WeatherUpdate> updates;
+    private Context context;
+    private int resource;
+    private ArrayList<SearchResult> objects;
 
     // public constructor
-    public WeatherUpdatesAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<WeatherUpdate> objects) {
+    public SearchResultAdapter(Context context, int resource, ArrayList<SearchResult> objects) {
         // pass the parameters to the super class
         super(context, resource, objects);
         // set the values to the global variables
         this.context = context;
         this.resource = resource;
-        this.updates = objects;
+        this.objects = objects;
     }
 
 
@@ -45,24 +44,15 @@ public class WeatherUpdatesAdapter extends ArrayAdapter<WeatherUpdate> {
         }
 
         // get the corresponding data object using position
-        WeatherUpdate object = updates.get(position);
+        SearchResult result = objects.get(position);
 
         // bind views by calling findViewById on the convertView (because we're not in an Activity, so we need to call findViewById on the root view)
-        TextView applicableDate = convertView.findViewById(R.id.applicable_date);
-        TextView minTemp = convertView.findViewById(R.id.min_temp);
-        TextView maxTemp = convertView.findViewById(R.id.max_temp);
-        TextView theTemp = convertView.findViewById(R.id.the_temp);
-
+        TextView city = convertView.findViewById(R.id.city);
 
         // set texts using data from the data object
-        applicableDate.setText(object.getApplicableDate());
-        minTemp.setText(object.getMinTemp() + " C");
-        maxTemp.setText(object.getMaxTemp() + " C");
-        theTemp.setText(object.getTheTemp() + " C");
-
+        city.setText(result.getName());
 
         // return the inflated convertView
         return convertView;
-
     }
 }
