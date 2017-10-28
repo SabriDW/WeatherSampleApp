@@ -6,48 +6,48 @@ package com.sabrimonaf.json;
 
 public class WeatherUpdate {
 
-    private String applicableDate;
-    private double minTemp;
-    private double maxTemp;
-    private double theTemp;
+    private String applicable_date;
+    private double min_temp;
+    private double max_temp;
+    private double the_temp;
 
 
     public WeatherUpdate(String applicableDate, double minTemp, double maxTemp, double theTemp) {
-        this.applicableDate = applicableDate;
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
-        this.theTemp = theTemp;
+        this.applicable_date = applicableDate;
+        this.min_temp = minTemp;
+        this.max_temp = maxTemp;
+        this.the_temp = theTemp;
     }
 
-    public String getApplicableDate() {
-        return applicableDate;
+    public String getApplicable_date() {
+        return applicable_date;
     }
 
-    public void setApplicableDate(String applicableDate) {
-        this.applicableDate = applicableDate;
+    public void setApplicable_date(String applicable_date) {
+        this.applicable_date = applicable_date;
     }
 
-    public double getMinTemp() {
-        return minTemp;
+    public double getMin_temp() {
+        return min_temp;
     }
 
-    public void setMinTemp(double minTemp) {
-        this.minTemp = minTemp;
+    public void setMin_temp(double min_temp) {
+        this.min_temp = min_temp;
     }
 
-    public double getMaxTemp() {
-        return maxTemp;
+    public double getMax_temp() {
+        return max_temp;
     }
 
-    public void setMaxTemp(double maxTemp) {
-        this.maxTemp = maxTemp;
+    public void setMax_temp(double max_temp) {
+        this.max_temp = max_temp;
     }
 
-    public double getTheTemp() {
-        return theTemp;
+    public double getThe_temp() {
+        return the_temp;
     }
 
-    public void setTheTemp(double theTemp) {
-        this.theTemp = theTemp;
+    public void setThe_temp(double the_temp) {
+        this.the_temp = the_temp;
     }
 }

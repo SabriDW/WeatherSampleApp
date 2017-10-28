@@ -55,10 +55,10 @@ public class WeatherUpdatesAdapter extends ArrayAdapter<WeatherUpdate> {
 
 
         // set texts using data from the data object
-        applicableDate.setText(object.getApplicableDate());
-        minTemp.setText(object.getMinTemp() + " C");
-        maxTemp.setText(object.getMaxTemp() + " C");
-        theTemp.setText(object.getTheTemp() + " C");
+        applicableDate.setText(object.getApplicable_date());
+        minTemp.setText(object.getMin_temp() + " C");
+        maxTemp.setText(object.getMax_temp() + " C");
+        theTemp.setText(object.getThe_temp() + " C");
 
 
         // return the inflated convertView

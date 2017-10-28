@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +64,7 @@ public class SearchActivity extends AppCompatActivity {
             final ArrayList<SearchResult> results = new ArrayList<>();
 
             // loop the JSON array to get the individual objects inside it
-            for(int i = 0; i < root.length(); i++){
+            for (int i = 0; i < root.length(); i++) {
 
                 // get an object from the array using the for loop counter (i)
                 JSONObject object = root.getJSONObject(i);
@@ -171,8 +172,14 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
+
             // call the updateUI() method and pass the json string to it (s)
-            updateUI(s);
+
+            if (s != null && !s.isEmpty())
+                updateUI(s);
+            else
+                Toast.makeText(SearchActivity.this, "No Internet!!!", Toast.LENGTH_LONG).show();
         }
     }
 

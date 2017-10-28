@@ -9,9 +9,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +17,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -50,53 +47,13 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void updateUI(String s) {
 
-        // wrap the JSON parsing logic inside try/catch
-        try {
+        DetailsJSONResponse response = new Gson().fromJson(s, DetailsJSONResponse.class);
 
-            // create a new JSONObject from the string s, because the root of the response is an object
-            JSONObject root = new JSONObject(s);
+        city.setText(response.getTitle());
 
-            // get title from the root which will contain the city's name
-            String title = root.getString("title");
+        WeatherUpdatesAdapter adapter = new WeatherUpdatesAdapter(this, R.layout.item_weather_update, response.getConsolidated_weather());
 
-            // get weather updates array from the root
-            JSONArray weatherUpdates = root.getJSONArray("consolidated_weather");
-
-            // create an empty ArrayList which will hold the weather updates
-            ArrayList<WeatherUpdate> updateArrayList = new ArrayList<>();
-
-            // loop the JSON array to get the individual objects inside it
-            for (int i = 0; i < weatherUpdates.length(); i++) {
-
-                // get an object from the array using the for loop counter (i)
-                JSONObject currentUpdate = weatherUpdates.getJSONObject(i);
-
-                // get the relevant information
-                String applicableDate = currentUpdate.getString("applicable_date");
-                double minTemp = currentUpdate.getDouble("min_temp");
-                double maxTemp = currentUpdate.getDouble("max_temp");
-                double theTemp = currentUpdate.getDouble("the_temp");
-
-                // create a new object from the information we just got from the JSONObject
-                WeatherUpdate update = new WeatherUpdate(applicableDate, minTemp, maxTemp, theTemp);
-
-                // add it to the ArrayList that will hold the weather updates
-                updateArrayList.add(update);
-
-                // this process will repeat until it reaches the end of the array and put all the items inside our ArrayList
-            }
-
-            city.setText(title);
-
-            // create a WeatherUpdatesAdapter, pass the context, resId, and the list
-            WeatherUpdatesAdapter adapter = new WeatherUpdatesAdapter(this, R.layout.item_weather_update, updateArrayList);
-
-            // set the adapter to the list view
-            listView.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        listView.setAdapter(adapter);
 
         // hide the progressBar after the loading is finished
         progressBar.setVisibility(View.GONE);
